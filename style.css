@@ -177,27 +177,29 @@ label{ display: none; cursor: pointer; }
 
 
 
-.gallery {
-  position: relative; /* чтобы .hero-text позиционировался относительно */
-}
+.gallery { position: relative; } /* уже есть — оставляем */
 
-.hero-text {
+.hero-text{
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* идеально по центру */
+  transform: translate(-50%, -50%); /* идеальный центр */
+  width: 100%;
+  padding: 0 16px;                 /* небольшой «воздух» по бокам */
   text-align: center;
   color: var(--text);
-  font-size: clamp(32px, 8vw, 96px);
-  font-weight: bold;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 4px;
   z-index: 10;
-}
-.hero-text h1 {
+
+  font-size: clamp(18px, 8vw, 96px);
   font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: .06em;
+  text-transform: uppercase;
 }
+.hero-text h1{ margin: 0; }
+
+.hero-text h1 { font-weight: 900; }
+
 
 /* === Переключатель темы === */
 .theme-toggle {
@@ -551,3 +553,8 @@ body { padding-inline: 12px; }
   margin: clamp(60px, 6vw, 80px) auto 0; /* ↑ отступ сверху */
   padding-inline: var(--pad);
 }
+
+
+
+
+
