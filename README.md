@@ -1,1 +1,1 @@
-# Baiterek_resort
+https://jahfaly.github.io/Baiterek_resort/
