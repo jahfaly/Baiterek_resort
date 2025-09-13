@@ -1,0 +1,1 @@
+# Baiterek_resort
