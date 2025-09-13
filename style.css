@@ -1,0 +1,553 @@
+/* ====== Base ====== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+ul, ol { list-style: none; } blockquote, q { quotes: none; }
+
+:root{
+  /* сетка */
+  --gap: clamp(12px, 3vw, 32px);
+  --shift: clamp(0px, 8vw, 200px);
+  --pad: clamp(12px, 4vw, 32px);
+  --maxw: 1100px;
+  /* шапка */
+  --headerh: 100px;
+  --bg: #1f1f1f;
+  --text: #fff;
+}
+/* резерв под скроллбар, чтобы не было сдвига между страницами */
+html { scrollbar-gutter: stable; }
+
+/* fallback для браузеров без поддержки scrollbar-gutter */
+@supports not (scrollbar-gutter: stable) {
+  html { overflow-y: scroll; } /* всегда показываем «место» под скролл */
+}
+
+
+html, body { height: 100%; }
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--headerh); /* контент под fixed-хедером */
+}
+
+/* ====== Header / Nav ====== */
+.header{
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--headerh);
+  display: flex; align-items: center;
+  background: var(--bg);
+  z-index: 1000;
+}
+
+.nav{
+  max-width: 90%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.logo{ width: 70px; height: auto; display: block; }
+.nav > a img{ width: 100px; border-radius: 50%; }
+
+/* меню по умолчанию (десктоп) */
+.header-list{
+  display: flex;
+  gap: 20px;
+  /* важно для фикса «рывка» при входе в брейкпоинт */
+  transition: none;
+  transform: none;
+    display: flex;
+  gap: 20px;
+  align-items: center; /* добавили */
+}
+
+.header-list li a{
+  color: var(--text);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* бургер-элементы по умолчанию скрыты */
+#burger-toggle{ display: none; }
+label{ display: none; cursor: pointer; }
+
+/* ====== Галерея: ВСЕГДА 3 колонки в каждом ряду ====== */
+.container_1,
+.container_2{
+  max-width: var(--maxw);
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: var(--pad);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--gap);
+  flex-wrap: nowrap;                /* не переносим! */
+}
+
+/* смещения двух рядов */
+.container_1{ padding-left: calc(var(--pad) + var(--shift)); }
+.container_2{
+  padding-right: calc(var(--pad) + var(--shift));
+  padding-top: clamp(24px, 8vw, 100px);
+}
+
+/* три карточки в ряд */
+.container_1 > div,
+.container_2 > div{
+  flex: 0 0 calc((100% - 2 * var(--gap)) / 3);
+}
+
+/* карточки: одинаковые пропорции, аккуратное сжатие */
+.container_1 img,
+.container_2 img{
+  width: 100%;
+  height: auto;          /* сохраняем пропорции при уменьшении */
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+
+/* ====== Мобилка: полноэкранный бургер, сетку НЕ трогаем ====== */
+@media (max-width: 784px){
+  /* иконка бургера */
+  label{
+    position: relative;
+    display: block;
+    width: 30px; height: 25px;
+    z-index: 1001; /* выше оверлея меню */
+  }
+  label::before, label::after, label span{
+    content: ""; position: absolute; left: 0; right: 0;
+    height: 3px; background: var(--text); transition: .3s;
+  }
+  label::before{ top: 0; }
+  label::after { bottom: 0; }
+  label span   { top: 11px; }
+
+  /* анимация крестика */
+  #burger-toggle:checked ~ label::after{ transform: rotate(45deg); bottom: 10px; }
+  #burger-toggle:checked ~ label::before{ transform: rotate(-45deg); top: 12px; }
+  #burger-toggle:checked ~ label span   { transform: rotate(-45deg); top: 12px; }
+
+  /* полноэкранное меню */
+  .header-list{
+    position: fixed;
+    inset: 0;                 /* top/right/bottom/left: 0 */
+    height: 100vh;
+    background: var(--bg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    font-size: 22px;
+    z-index: 1000;
+
+    /* спрятано сверху; БЕЗ анимации по умолчанию,
+       чтобы не было «рывка» при входе в брейкпоинт */
+    transform: translateY(-100%);
+    transition: none;
+  }
+
+  /* при открытии/закрытии анимируем плавно */
+  #burger-toggle:checked ~ .header-list{
+    transform: translateY(0);
+    transition: transform .3s ease;
+  }
+  #burger-toggle:not(:checked) ~ .header-list{
+    transition: transform .3s ease;
+  }
+
+  /* небольшие отступы контейнера навигации */
+  .nav{ max-width: 100%; padding: 0 16px; }
+}
+
+/* совсем узкие — только шрифт меню уменьшаем */
+@media (max-width: 480px){
+  .header-list li a{ font-size: 16px; }
+}
+
+
+
+
+
+.gallery {
+  position: relative; /* чтобы .hero-text позиционировался относительно */
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* идеально по центру */
+  text-align: center;
+  color: var(--text);
+  font-size: clamp(32px, 8vw, 96px);
+  font-weight: bold;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  z-index: 10;
+}
+.hero-text h1 {
+  font-weight: 900;
+}
+
+/* === Переключатель темы === */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text);
+  transition: color .3s;
+}
+
+/* Светлая тема */
+body.light-theme {
+  --bg: #ffffff;
+  --text: #000000;
+
+  /* добавь это: */
+  --card-bg: #f7f7f7;        /* фон карточек/«рамка» */
+  --price: #000000;          /* цвет цены */
+  --shadow: 0 1px 2px rgba(0,0,0,.12);
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,.06);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Цвета и базовые стили */
+:root{
+  --bg: #1f1f1f;
+  --text: #ffffff;
+  --price: #ffffff;
+  --card-bg: #1f1f1f;
+  --shadow: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,.5);
+  --radius: 12px;
+  --pad: 16px;
+}
+
+*{ box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body.page{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.5;
+}
+
+/* Header */
+.header{
+  background: var(--bg);
+  padding: var(--pad);
+  /* box-shadow: var(--shadow); */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo{
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+/* Banner */
+.banner{
+  padding: var(--pad);
+  text-align: center;
+}
+.banner__title{
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.banner__text{ margin: 0; }
+
+/* Products grid */
+.products{
+  padding: var(--pad);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (min-width: 768px){
+  .products{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px){
+  .products{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Product card */
+.product-card{
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: var(--radius);
+}
+.product-card__img{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+.product-card__title{
+  margin: 8px 0 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.product-card__desc{
+  margin: 6px 0 0 0;
+  opacity: .9;
+}
+.product-card__row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.product-card__price{
+  color: var(--price);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Внутренние отступы внутри карточек */
+.product-card{
+  padding: 8px;
+}
+
+/* Footer */
+.footer{
+  margin-top: 32px;
+  text-align: center;
+  padding: var(--pad);
+  box-shadow: var(--shadow-inset);
+  background: var(--bg);
+}
+
+/* ===== Product Modal ===== */
+.product-modal{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: 1fr;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s ease, visibility .2s step-end;
+}
+.product-modal.is-open{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .2s ease;
+}
+.product-modal__backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+}
+.product-modal__dialog{
+  position: relative;
+  margin: auto;
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: min(92vw, 720px);
+  padding: var(--pad);
+}
+.product-modal__img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: contain;
+  transition: opacity .2s ease; /* smooth swap */
+  opacity: 0;                   /* станет видимой после загрузки */
+}
+.product-modal.is-open .product-modal__img.is-ready{
+  opacity: 1;
+}
+.product-modal__title{
+  margin: 12px 0 0 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.product-modal__price{
+  margin-top: 6px;
+  color: var(--price);
+  font-weight: 700;
+}
+.product-modal__close{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Описание в модалке */
+.product-modal__desc{
+  margin-top: 8px;
+  opacity: .9;
+  line-height: 1.6;
+}
+.product-modal__close:hover{ opacity: .85; }
+
+/* Блокируем прокрутку страницы, пока открыта модалка */
+body.has-modal{ overflow: hidden; }
+
+
+
+
+
+
+
+
+/* contacts.html */
+/* Центрирование по вертикали и горизонтали */
+/* контакты — центрирование с учетом фиксированного header */
+.contacts-center{
+  min-height: calc(100svh - var(--headerh));    /* fallback */
+  min-height: calc(100dvh - var(--headerh));    /* где поддерживается — точная высота экрана */
+  display: grid;
+  place-items: center;                           /* центр по обеим осям */
+  padding: 16px;
+}
+
+
+/* Стек из ссылок */
+.contacts{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  text-align: center;
+}
+
+
+.contacts a{
+  color: var(--text);            /* берём цвет из темы */
+  text-decoration: none;
+  font: 16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: background-color .12s ease, transform .12s ease;
+  outline: none;
+}
+.contacts a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+/* по желанию, поддержите клавиатуру */
+.contacts a:focus-visible{ outline: 2px solid currentColor; outline-offset: 2px; }
+
+
+/* a-frame.html */
+/* ===== A-frame (финальная версия) ===== */
+
+/* База */
+
+/* Небольшие боковые отступы */
+body { padding-inline: 12px; }
+@media (min-width: 768px)  { body { padding-inline: 16px; } }
+@media (min-width: 1200px) { body { padding-inline: 24px; } }
+
+/* Текстовый блок над галереей (без рамки) */
+.top-note{
+  margin: 16px 0 20px;
+  padding: 8px 0;
+  text-align: center;
+
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial;
+  font-weight: 600;
+  font-size: clamp(18px, 1rem + 0.7vw, 22px);
+  line-height: 1.45;
+  letter-spacing: .01em;
+
+  color: var(--note-color);
+  transition: color .2s ease;
+
+
+
+  
+}
+/* Та же ширина, что и у .gallery */
+@media (min-width: 1024px){
+  .top-note{ max-width: 1200px; margin-left: auto; margin-right: auto; }
+}
+@media (min-width: 1440px){
+  .top-note{ max-width: 1280px; }
+}
+
+/* Галерея */
+.gallery { display: flex; flex-wrap: wrap; margin: -8px 0; }
+.gallery__item { flex: 0 0 50%; padding: 8px; }   /* 2 в ряд до 1024px */
+.gallery__item img { display: block; width: 100%; height: auto; border-radius: 6px; }
+
+/* С 1024px — 4 в ряд и умеренная ширина */
+@media (min-width: 1024px) {
+  .gallery__item { flex-basis: 25%; }             /* 4 в ряд */
+  .gallery { max-width: 1200px; margin: -8px auto; }
+}
+@media (min-width: 1440px) {
+  .gallery { max-width: 1280px; }
+}
+
+
+/* gazebo.html */
+
+
+
+
+
+/* Крестик модалки — всегда белый */
+.product-modal__close{
+  color: #fff;                /* фиксируем белый цвет */
+  text-shadow: 0 1px 2px rgba(0,0,0,.5); /* чуть лучше виден на светлом фоне */
+}
+
+
+/* Отступ и выравнивание виджета погоды */
+.weather, #weather-here{
+  max-width: var(--maxw);
+  margin: clamp(60px, 6vw, 80px) auto 0; /* ↑ отступ сверху */
+  padding-inline: var(--pad);
+}

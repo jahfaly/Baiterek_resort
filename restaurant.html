@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+    <a href="main.html">
+      <img class="logo" src="img/main/BR-logo-light.png" alt="Baiterek Resort logo">
+    </a>
+
+
+      <input id="burger-toggle" type="checkbox">
+      <label for="burger-toggle"><span></span></label>
+
+      <ul class="header-list">
+        <li><a href="main.html">Главная страница</a></li>
+        <li><a href="a-frame.html">A-frame</a></li>
+        <li><a href="restaurant.html">Ресторан</a></li>
+        <li><a href="gazebo.html">Беседки</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li>
+        <button id="theme-toggle" class="theme-toggle">🌙</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <h2 class="banner__title">Добро пожаловать в наш ресторан!</h2>
+    <p class="banner__text">Для полного ознакомления и по прочим вопросам можете перейти в раздел контакты и связаться с нами.</p>
+  </section>
+
+  <!-- Products -->
+  <main class="products">
+    <!-- 1) steyk_t_bone -->
+    <article class="product-card">
+      <img src="img/restaraunt/steyk_t_bone.jpg" alt="steyk_t_bone" class="product-card__img">
+      <h3 class="product-card__title">Стейк T Bone</h3>
+      <!-- <p class="product-card__desc">Стейк T Bone с аппетитной корочкой ...</p> -->
+      <div class="product-card__row">
+        <span class="product-card__price">6900тг</span>
+      </div>
+    </article>
+
+    <!-- 2) shashlyk_iz_kurinykh_krylyshek -->
+    <article class="product-card">
+      <img src="img/restaraunt/shashlyk_iz_kurinykh_krylyshek.jpg" alt="shashlyk_iz_kurinykh_krylyshek" class="product-card__img">
+      <h3 class="product-card__title">Шашлык из куриных крылышек</h3>
+      <!-- <p class="product-card__desc">Шашлык из куриных крылышек ...</p> -->
+      <div class="product-card__row">
+        <span class="product-card__price">2100тг</span>
+      </div>
+    </article>
+
+    <!-- 3) shashlyk_iz_govyadiny -->
+    <article class="product-card">
+      <img src="img/restaraunt/shashlyk_iz_govyadiny.jpg" alt="shashlyk_iz_govyadiny" class="product-card__img">
+      <h3 class="product-card__title">Шашлык из телятины</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">4000тг</span>
+      </div>
+    </article>
+
+    <!-- 4) shashlyk_iz_utinogo_file -->
+    <article class="product-card">
+      <img src="img/restaraunt/shashlyk_iz_utinogo_file.jpg" alt="shashlyk_iz_utinogo_file" class="product-card__img">
+      <h3 class="product-card__title">Шашлык из утиного филе</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">3000тг</span>
+      </div>
+    </article>
+
+    <!-- 5) shashlyk_iz_kurinogo_file -->
+    <article class="product-card">
+      <img src="img/restaraunt/shashlyk_iz_kurinogo_file.jpg" alt="shashlyk_iz_kurinogo_file" class="product-card__img">
+      <h3 class="product-card__title">Шашлык из куриного филе</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">2600тг</span>
+      </div>
+    </article>
+
+    <!-- 6) salat_ot_shefa -->
+    <article class="product-card">
+      <img src="img/restaraunt/salat_ot_shefa.jpg" alt="salat_ot_shefa" class="product-card__img">
+      <h3 class="product-card__title">Салат от шефа</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">3600тг</span>
+      </div>
+    </article>
+
+    <!-- 7) steyk_lososya -->
+    <article class="product-card">
+      <img src="img/restaraunt/steyk_lososya.jpg" alt="steyk_lososya" class="product-card__img">
+      <h3 class="product-card__title">Стейк лосося</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">7500тг</span>
+      </div>
+    </article>
+
+    <!-- 8) fettuchini_s_kuritsey_i_gribami -->
+    <article class="product-card">
+      <img src="img/restaraunt/fettuchini_s_kuritsey_i_gribami.jpg" alt="fettuchini_s_kuritsey_i_gribami" class="product-card__img">
+      <h3 class="product-card__title">Феттучини с курицей и грибами</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">3500тг</span>
+      </div>
+    </article>
+
+    <!-- 9) tom_yam -->
+    <article class="product-card">
+      <img src="img/restaraunt/tom_yam.jpg" alt="tom_yam" class="product-card__img">
+      <h3 class="product-card__title">Том Ям</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">3900тг</span>
+      </div>
+    </article>
+
+    <!-- 10) zharovnya_iz_baraniny -->
+    <article class="product-card">
+      <img src="img/restaraunt/zharovnya_iz_baraniny.jpg" alt="zharovnya_iz_baraniny" class="product-card__img">
+      <h3 class="product-card__title">Жаровня из баранины</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">4200тг</span>
+      </div>
+    </article>
+
+    <!-- 11) kolbaski_iz_govyadiny -->
+    <article class="product-card">
+      <img src="img/restaraunt/kolbaski_iz_govyadiny.jpg" alt="kolbaski_iz_govyadiny" class="product-card__img">
+      <h3 class="product-card__title">Колбаски из говядины</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">4100тг</span>
+      </div>
+    </article>
+
+    <!-- 12) kavkazskaya_narezka -->
+    <article class="product-card">
+      <img src="img/restaraunt/kavkazskaya_narezka.jpg" alt="kavkazskaya_narezka" class="product-card__img">
+      <h3 class="product-card__title">Кавказская закуска</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">3700тг</span>
+      </div>
+    </article>
+
+    <!-- 13) khachapuri_po_adzharski -->
+    <article class="product-card">
+      <img src="img/restaraunt/khachapuri_po_adzharski.jpg" alt="khachapuri_po_adzharski" class="product-card__img">
+      <h3 class="product-card__title">Хачапури по аджарски</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">3100тг</span>
+      </div>
+    </article>
+
+    <!-- 14) rybnoe_assorti -->
+    <article class="product-card">
+      <img src="img/restaraunt/rybnoe_assorti.jpg" alt="rybnoe_assorti" class="product-card__img">
+      <h3 class="product-card__title">Рыбное ассорти</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">6700тг</span>
+      </div>
+    </article>
+
+    <!-- 15) pitstsa_salyami -->
+    <article class="product-card">
+      <img src="img/restaraunt/pitstsa_salyami.jpg" alt="pitstsa_salyami" class="product-card__img">
+      <h3 class="product-card__title">Пицца Пепперони</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">3450тг</span>
+      </div>
+    </article>
+
+    <!-- 16) pitstsa_margarita -->
+    <article class="product-card">
+      <img src="img/restaraunt/pitstsa_margarita.jpg" alt="pitstsa_margarita" class="product-card__img">
+      <h3 class="product-card__title">Пицца Маргарита</h3>
+      <div class="product-card__row">
+        <span class="product-card__price">2800тг</span>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 Baiterek resort
+  </footer>
+
+<!-- ===== Product Modal (универсальная) ===== -->
+<div class="product-modal" id="product-modal" aria-hidden="true">
+  <div class="product-modal__backdrop" data-modal-close></div>
+
+  <div class="product-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+    <button class="product-modal__close" type="button" aria-label="Закрыть" data-modal-close>×</button>
+
+    <img class="product-modal__img" alt="" />
+    <h3 class="product-modal__title" id="product-modal-title"></h3>
+    <p class="product-modal__desc"></p> <!-- НОВОЕ: описание -->
+    <div class="product-modal__price"></div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
